@@ -88,8 +88,14 @@ order by endtime desc;
 
 drop view if exists activity;
 create view activity as
-	select * from today
-	order by endtime desc;
+	select 
+	activity_detail, 
+	sec_to_time(sum(time_to_sec(duration))) as total 
+from all_time
+where date(endtime) = date(endtime)
+group by 1 order by 2 desc;
+
+
 
 
 /* All current week work  -- this works 07.2.2021 */
@@ -147,6 +153,7 @@ select
 	activity_detail, 
 	sec_to_time(sum(time_to_sec(duration))) as total 
 from all_time
+where date(endtime) = date(endtime)
 group by 1 order by 2 desc;
 
 
