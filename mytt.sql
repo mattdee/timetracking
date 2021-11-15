@@ -86,13 +86,13 @@ union all
 select * from today_break
 order by endtime desc;
 
-drop view if exists activity;
-create view activity as
+drop view if exists today_activity;
+create view today_activity as
 	select 
 	activity_detail, 
 	sec_to_time(sum(time_to_sec(duration))) as total 
-from all_time
-where date(endtime) = date(endtime)
+from today
+where week(endtime) = week(now())
 group by 1 order by 2 desc;
 
 
@@ -149,6 +149,16 @@ END) as duration,
 END) as status
 from tt.tt ;
 
+select 
+	activity_detail, 
+	sec_to_time(sum(time_to_sec(duration))) as total 
+from today_work
+where date(endtime) = date(endtime)
+group by 1 order by 2 desc;
+
+
+
+/* All time */
 select 
 	activity_detail, 
 	sec_to_time(sum(time_to_sec(duration))) as total 
