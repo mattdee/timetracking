@@ -96,10 +96,10 @@ report()
 	echo "Reporting break times"
 	mysql -e "select * from tt.today_break;"
 
-    echo "Reporting activity duration from today"
-    mysql -e "select * from tt.activity"
+    echo "Reporting activity duration for today"
+    mysql -e "select * from tt.today_activity"
 
-    echo "What have you been up to?"
+    echo "Reporting activity duration for the week"
     mysql -e "select * from tt.this_week_activity"
     
 }
